@@ -13,6 +13,8 @@ from typing import IO
 def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """
     Evaluate Brainfuck code and apply it to the Tape.
+
+    Read from stdin and write to stdout by default.
     """
     i = 0
 
@@ -38,16 +40,15 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
             tape.value = ord(input_file.read(1))
 
         elif c == '[':
-            # If the byte at the data pointer is zero, then instead of moving
-            # the instruction pointer forward to the next command, jump it
-            # forward to the command after the matching ] command.
+            # If the byte at the data pointer is zero, then jump the
+            # instruction pointer forward to the command after the matching
+            # ']'.
             if tape.value == 0:
-                skip = 0
+                skip = 0  # The number of nested loops to skip over.
 
-                # Find matching ']'
+                # Find matching ']'.
                 for j in range(i + 1, len(code)):
                     if code[j] == '[':
-                        # Skip over nested loops.
                         skip += 1
                     elif code[j] == ']':
                         if skip == 0:
@@ -59,15 +60,14 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
                     raise SyntaxError("missing closing bracket")
 
         elif c == ']':
-            # If the byte at the data pointer is nonzero, then instead of
-            # moving the instruction pointer forward to the next command, jump
-            # it back to the command after the matching [ command.
+            # If the byte at the data pointer is non-zero, then jump the
+            # instruction pointer back to the command after the matching '['.
             if tape.value != 0:
-                skip = 0
+                skip = 0  # The number of nested loops to skip over.
 
+                # Find matching '['.
                 for j in range(i - 1, -1, -1):
                     if code[j] == ']':
-                        # Skip over nested loops.
                         skip += 1
                     elif code[j] == '[':
                         if skip == 0:

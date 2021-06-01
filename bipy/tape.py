@@ -46,6 +46,9 @@ class Tape():
 
     @property
     def value(self) -> int:
+        """
+        The value of the tape at the current index.
+        """
         return self.__tape[self.__index]
 
     @value.setter
