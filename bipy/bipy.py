@@ -35,7 +35,3 @@ def main() -> None:
     code = "".join(program.readlines())
 
     tape.apply(code)
-
-
-if __name__ == "__main__":
-    main()

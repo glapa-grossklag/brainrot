@@ -1,12 +1,14 @@
 # Overview
 
-This is a very simple interpreter of the
-[Brainfuck](https://en.wikipedia.org/wiki/Brainfuck) esoteric programming
-language.
+This is a **B**rainfuck **i**nterpreter in **Py**thon (hence the name bipy).
+
+> What is Brainfuck?
+
+See [Wikipedia](https://en.wikipedia.org/wiki/Brainfuck).
 
 # Usage
 
-```sh
-$ python bf.py ./examples/hello_world.bf
+```
+$ python bipy ./examples/hello_world.bf
 Hello World!
 ```
