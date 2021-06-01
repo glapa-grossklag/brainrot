@@ -12,14 +12,17 @@ MAX = 256 # A cell is represented by an unsigned, 8-bit integer.
 
 
 class Tape():
-    __tape: list[int]
+    __tape: bytearray
     __index: int
 
     def __init__(self, size: int) -> None:
-        self.__tape = [0] * size
+        self.__tape = bytearray(size)
         self.__index = 0
 
     def __len__(self) -> int:
+        """
+        Return the length of the Tape.
+        """
         return len(self.__tape)
 
     def add(self, n: int) -> None:
