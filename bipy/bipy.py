@@ -1,7 +1,7 @@
 """
 bipy.py
 
-This module is the actual Brainfuck interpreter.
+The actual Brainfuck interpreter.
 """
 
 
@@ -12,7 +12,7 @@ from typing import IO
 
 def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """
-    Evaluate given Brainfuck code and apply it to the given Tape.
+    Evaluate Brainfuck code and apply it to the Tape.
     """
     i = 0
 

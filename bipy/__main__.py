@@ -1,12 +1,12 @@
-#!/usr/bin/env python3
+"""
+__main__.py
 
-import bipy
-
+The driver code to read and interpret a Brainfuck source file.
+"""
 
 import sys
-import util
-
 import bipy
+import util
 from tape import Tape
 
 
