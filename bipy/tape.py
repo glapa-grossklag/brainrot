@@ -5,7 +5,6 @@ A Brainfuck tape.
 """
 
 import sys
-from typing import TextIO
 
 
 MAX = 256 # A cell is represented by an unsigned, 8-bit integer.

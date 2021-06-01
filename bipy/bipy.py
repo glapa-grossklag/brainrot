@@ -42,21 +42,17 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
             # the instruction pointer forward to the next command, jump it
             # forward to the command after the matching ] command.
             if tape.value == 0:
-                found = False
                 skip = 0
 
                 # Find matching ']'
                 for j in range(i + 1, len(code)):
-                    if found:
-                        break
-
                     if code[j] == '[':
                         # Skip over nested loops.
                         skip += 1
                     elif code[j] == ']':
                         if skip == 0:
                             i = j
-                            found = True
+                            break
                         else:
                             skip -= 1
                 else:
@@ -67,20 +63,16 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
             # moving the instruction pointer forward to the next command, jump
             # it back to the command after the matching [ command.
             if tape.value != 0:
-                found = False
                 skip = 0
 
                 for j in range(i - 1, -1, -1):
-                    if found:
-                        break
-
                     if code[j] == ']':
                         # Skip over nested loops.
                         skip += 1
                     elif code[j] == '[':
                         if skip == 0:
                             i = j
-                            found = True
+                            break
                         else:
                             skip -= 1
                 else:
