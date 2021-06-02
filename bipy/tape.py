@@ -24,12 +24,6 @@ class Tape():
         """
         return len(self.__tape)
 
-    def add(self, n: int) -> None:
-        """
-        Add `n` to the current cell of the tape.
-        """
-        self.value += n
-
     def move(self, n: int) -> None:
         """
         Move the current cell by `n`.

@@ -28,10 +28,10 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
             tape.move(-1)
 
         elif c == '+':
-            tape.add(1)
+            tape.value += 1
 
         elif c == '-':
-            tape.add(-1)
+            tape.value -= 1
 
         elif c == '.':
             output_file.write(chr(tape.value))
