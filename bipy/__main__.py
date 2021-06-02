@@ -11,7 +11,7 @@ from tape import Tape
 
 
 def main() -> None:
-    program = sys.stdin
+    sourcefile = sys.stdin
 
     # CLI Arguments
     if len(sys.argv) > 2:
@@ -21,15 +21,18 @@ def main() -> None:
 
     if len(sys.argv) == 2:
         try:
-            program = open(sys.argv[1], "r")
+            sourcefile = open(sys.argv[1], "r")
         except OSError:
             util.printerr("Failed to open '{}'".format(sys.argv[1]))
             exit(2)
+    else:
+        # Input is stdin.
+        print("Welcome to bipy: a Brainfuck Interpreter in Python")
 
     tape = Tape(30000)
-    code = "".join(program.readlines())
+    code = sourcefile.read()
     bipy.evaluate(code, tape)
-    program.close()
+    sourcefile.close()
 
 
 if __name__ == "__main__":
