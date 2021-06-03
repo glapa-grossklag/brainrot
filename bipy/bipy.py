@@ -6,8 +6,9 @@ The actual Brainfuck interpreter.
 
 
 import sys
-from tape import Tape
 from typing import IO
+
+from tape import Tape
 
 
 def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:

@@ -19,4 +19,5 @@ To run bipy's REPL:
 ```
 $ python bipy
 Welcome to bipy: a Brainfuck Interpreter in Python
+[bipy] 
 ```
