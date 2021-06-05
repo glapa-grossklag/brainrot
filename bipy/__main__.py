@@ -35,8 +35,17 @@ def main() -> None:
         # REPL
         print("Welcome to bipy: a Brainfuck Interpreter in Python")
         while True:
-            line = input(constants.PROMPT)
-            bipy.evaluate(line, tape)
+            try:
+                line = input(constants.PROMPT)
+            except (KeyboardInterrupt, EOFError):
+                # Exit gracefully.
+                exit(0)
+
+            try:
+                bipy.evaluate(line, tape)
+            except KeyboardInterrupt:
+                # Silently stop evaluating the current line.
+                pass
 
     sourcefile.close()
 
