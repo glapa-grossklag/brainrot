@@ -1,5 +1,7 @@
 [
     A program to print out ":)\n"
+
+    For a minified version, see ":).bf".
 ]
 
 define macro 0 as add 10 to the cell on the right
