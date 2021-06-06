@@ -6,12 +6,16 @@ The actual Brainfuck interpreter.
 
 
 import sys
-from typing import IO
+from typing import IO, TypedDict
 
-from tape import Tape
+from tape import Tape, MAX
+
+# A NameSpace represents a mapping of the value of a cell (within 0 - MAX,
+# usually 0 - 255) to code (as a string).
+NameSpace = TypedDict("NameSpace", { n: str for n in range(0, MAX + 1) })
 
 
-def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
+def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """
     Evaluate Brainfuck code and apply it to the Tape.
 
@@ -78,5 +82,34 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
                             skip -= 1
                 else:
                     raise SyntaxError("missing open bracket")
+
+        elif c == '(':
+            name = tape.value
+            definition = ""
+
+            # Find matching ')'.
+            for j in range(i + 1, len(code)):
+                if code[j] == '(':
+                    raise SyntaxError("illegal nested function definition")
+
+                elif code[j] == ')':
+                    namespace[name] = definition
+                    i = j
+                    break
+
+                else:
+                    definition += code[j]
+            else:
+                raise SyntaxError("missing closing parenthesis")
+
+        elif c == ')':
+            # The `c == '('` case will handle any closing parenthesis, so this
+            # shouldn't ever be seen.
+            raise SyntaxError("missing opening parenthesis")
+
+        elif c == '!':
+            # Adjust `code` to contain the definition.
+            if tape.value in namespace:
+                code = code[:i + 1] + namespace[tape.value] + code[i + 1:]
 
         i += 1
