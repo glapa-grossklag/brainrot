@@ -3,7 +3,8 @@
 This is a **B**rainfuck **I**nterpreter in **Py**thon (hence the name bipy).
 
 In addition to the standard, bipy defines three more symbols detailed below.
-For an example of these new symbols in use, see [](examples/macro-smile.bf).
+For an example of these new symbols in use, see
+[examples/macro_smile.bf](examples/macro_smile.bf).
 
 | Symbol | Definition                                                           |
 |--------|----------------------------------------------------------------------|
