@@ -6,9 +6,10 @@ The actual Brainrot interpreter.
 
 
 import sys
-from typing import IO, TypedDict
+from typing import IO
 
-from tape import NameSpace, Tape, MAX
+from constants import NameSpace
+from tape import Tape
 
 def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """

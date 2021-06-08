@@ -5,16 +5,14 @@ A representation of the tape.
 """
 
 import sys
-
-
-MAX = 256 # A cell is represented by an unsigned, 8-bit integer.
+import constants
 
 
 class Tape():
     __tape: bytearray
     __index: int
 
-    def __init__(self, size: int) -> None:
+    def __init__(self, size: int = constants.TAPE_LENGTH) -> None:
         self.__tape = bytearray(size)
         self.__index = 0
 
@@ -47,4 +45,4 @@ class Tape():
 
     @value.setter
     def value(self, n: int) -> None:
-        self.__tape[self.__index] = n % MAX
+        self.__tape[self.__index] = n % constants.CELL_MAX

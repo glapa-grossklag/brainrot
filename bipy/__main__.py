@@ -14,7 +14,7 @@ from tape import Tape
 
 def main() -> None:
     sourcefile = sys.stdin
-    tape = Tape(constants.DEFAULT_TAPE_SIZE)
+    tape = Tape(constants.TAPE_LENGTH)
     namespace = {}
 
     if len(sys.argv) > 2:
