@@ -8,11 +8,7 @@ The actual Brainrot interpreter.
 import sys
 from typing import IO, TypedDict
 
-from tape import Tape, MAX
-
-# A NameSpace represents a mapping of the value of a cell (within 0 - MAX,
-# usually 0 - 255) to code (as a string).
-NameSpace = TypedDict("NameSpace", { n: str for n in range(0, MAX + 1) })
+from tape import NameSpace, Tape, MAX
 
 def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """
