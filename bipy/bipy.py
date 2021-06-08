@@ -61,24 +61,24 @@ def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.s
                     raise SyntaxError("missing ']'")
 
         elif c == ']':
-            # If the byte at the data pointer is non-zero, then jump the
-            # instruction pointer back to the command after the matching '['.
-            if tape.value != 0:
+            # This could be made more efficient by only seeking backwards if
+            # the current cell is non-zero, but seeking back allows for
+            # mismatched brackets to always be caught.
 
-                skip = 0  # The number of nested loops to skip over.
+            skip = 0  # The number of nested loops to skip over.
 
-                # Find matching '['.
-                for j in range(i - 1, -1, -1):
-                    if code[j] == ']':
-                        skip += 1
-                    elif code[j] == '[':
-                        if skip == 0:
-                            i = j
-                            break
-                        else:
-                            skip -= 1
-                else:
-                    raise SyntaxError("missing '['")
+            # Find matching '['.
+            for j in range(i - 1, -1, -1):
+                if code[j] == ']':
+                    skip += 1
+                elif code[j] == '[':
+                    if skip == 0:
+                        i = j - 1
+                        break
+                    else:
+                        skip -= 1
+            else:
+                raise SyntaxError("missing '['")
 
         elif c == '(':
             name = tape.value
