@@ -21,11 +21,14 @@ skimmed the Wikipedia article).
 | `!`    | Apply the macro where the name is the current cell's value.              |
 
 * Brainrot's cells are all exactly one octet, i.e., an eight-bit unsigned
-  integer. For this reason, addition and subtraction are both defined modulo 256.
+  integer. For this reason, addition and subtraction are both defined modulo
+  256.
 * The tape begins at cell 0 and goes until at least cell 2^16. Moving below
   cell 0 or above the maximum cell results in a syntax error.
 * If any of the following symbols are unmatched, a syntax error occurs: `[`,
   `]`, `(`, `)`.
+* The file extension on Brainrot source code is typically '.br'. A '.bf'
+  extension implies the code is compatible with Brainrot's parent language.
 
 # Usage
 
