@@ -9,40 +9,40 @@ import constants
 
 
 class Tape():
-    __tape: bytearray
-    __index: int
+    _tape: bytearray
+    _index: int
 
     def __init__(self, size: int = constants.TAPE_LENGTH) -> None:
-        self.__tape = bytearray(size)
-        self.__index = 0
+        self._tape = bytearray(size)
+        self._index = 0
 
     def __len__(self) -> int:
         """
         Return the length of the Tape.
         """
-        return len(self.__tape)
+        return len(self._tape)
 
     def move(self, n: int) -> None:
         """
         Move the current cell by `n`.
         """
-        if self.__index + n < 0:
+        if self._index + n < 0:
             raise ValueError("cannot move current cell below 0")
 
-        if self.__index >= len(self):
+        if self._index >= len(self):
             raise ValueError(
                 "cannot move current cell beyond size ({})".format(len(self))
             )
 
-        self.__index += n
+        self._index += n
 
     @property
     def value(self) -> int:
         """
         The value of the tape at the current index.
         """
-        return self.__tape[self.__index]
+        return self._tape[self._index]
 
     @value.setter
     def value(self, n: int) -> None:
-        self.__tape[self.__index] = n % constants.CELL_MAX
+        self._tape[self._index] = n % constants.CELL_MAX
