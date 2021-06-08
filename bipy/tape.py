@@ -1,7 +1,7 @@
 """
 tape.py
 
-A Brainfuck tape.
+A representation of the tape.
 """
 
 import sys

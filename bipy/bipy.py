@@ -1,19 +1,18 @@
 """
 bipy.py
 
-The actual Brainfuck interpreter.
+The actual Brainrot interpreter.
 """
 
 
 import sys
-from typing import IO
+from typing import IO, TypedDict
 
-from tape import Tape
+from tape import NameSpace, Tape, MAX
 
-
-def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
+def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """
-    Evaluate Brainfuck code and apply it to the Tape.
+    Evaluate Brainrot code and apply it to the Tape.
 
     Read from stdin and write to stdout by default.
     """
@@ -78,5 +77,34 @@ def evaluate(code: str, tape: Tape, input_file: IO = sys.stdin, output_file: IO 
                             skip -= 1
                 else:
                     raise SyntaxError("missing open bracket")
+
+        elif c == '(':
+            name = tape.value
+            definition = ""
+
+            # Find matching ')'.
+            for j in range(i + 1, len(code)):
+                if code[j] == '(':
+                    raise SyntaxError("illegal nested function definition")
+
+                elif code[j] == ')':
+                    namespace[name] = definition
+                    i = j
+                    break
+
+                else:
+                    definition += code[j]
+            else:
+                raise SyntaxError("missing closing parenthesis")
+
+        elif c == ')':
+            # The `c == '('` case will handle any closing parenthesis, so this
+            # shouldn't ever be seen.
+            raise SyntaxError("missing opening parenthesis")
+
+        elif c == '!':
+            # Adjust `code` to contain the definition.
+            if tape.value in namespace:
+                code = code[:i + 1] + namespace[tape.value] + code[i + 1:]
 
         i += 1

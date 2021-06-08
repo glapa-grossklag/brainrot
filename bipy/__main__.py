@@ -1,7 +1,7 @@
 """
 __main__.py
 
-The driver code to read and interpret a Brainfuck source file.
+The driver code to read and interpret a Brainrot source file.
 """
 
 
@@ -15,6 +15,7 @@ from tape import Tape
 def main() -> None:
     sourcefile = sys.stdin
     tape = Tape(constants.DEFAULT_TAPE_SIZE)
+    namespace = {}
 
     if len(sys.argv) > 2:
         util.printerr("Usage:")
@@ -29,11 +30,11 @@ def main() -> None:
             exit(2)
 
         code = sourcefile.read()
-        bipy.evaluate(code, tape)
+        bipy.evaluate(code, tape, namespace)
 
     elif len(sys.argv) == 1:
         # REPL
-        print("Welcome to bipy: a Brainfuck Interpreter in Python")
+        print("Welcome to bipy: a Brainrot Interpreter in Python")
         while True:
             try:
                 line = input(constants.PROMPT)
@@ -42,7 +43,7 @@ def main() -> None:
                 exit(0)
 
             try:
-                bipy.evaluate(line, tape)
+                bipy.evaluate(line, tape, namespace)
             except KeyboardInterrupt:
                 # Silently stop evaluating the current line.
                 pass
