@@ -1,7 +1,7 @@
 """
 __main__.py
 
-The driver code to read and interpret a Brainfuck source file.
+The driver code to read and interpret a Brainrot source file.
 """
 
 
@@ -34,7 +34,7 @@ def main() -> None:
 
     elif len(sys.argv) == 1:
         # REPL
-        print("Welcome to bipy: a Brainfuck Interpreter in Python")
+        print("Welcome to bipy: a Brainrot Interpreter in Python")
         while True:
             try:
                 line = input(constants.PROMPT)

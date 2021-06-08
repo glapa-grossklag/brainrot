@@ -1,7 +1,7 @@
 """
 bipy.py
 
-The actual Brainfuck interpreter.
+The actual Brainrot interpreter.
 """
 
 
@@ -14,10 +14,9 @@ from tape import Tape, MAX
 # usually 0 - 255) to code (as a string).
 NameSpace = TypedDict("NameSpace", { n: str for n in range(0, MAX + 1) })
 
-
 def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.stdin, output_file: IO = sys.stdout) -> None:
     """
-    Evaluate Brainfuck code and apply it to the Tape.
+    Evaluate Brainrot code and apply it to the Tape.
 
     Read from stdin and write to stdout by default.
     """
