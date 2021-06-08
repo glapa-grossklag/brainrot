@@ -109,4 +109,7 @@ def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.s
             if tape.value in namespace:
                 code = code[:i + 1] + namespace[tape.value] + code[i + 1:]
 
+        elif c == '#':
+            sys.stderr.write("Cell {}: {} == '{}'\n".format(tape._index, tape.value, chr(tape.value)))    
+
         i += 1

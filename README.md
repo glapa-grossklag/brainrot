@@ -19,6 +19,7 @@ skimmed the Wikipedia article).
 | `(`    | Define a macro. The "name" of the macro is the current cell's value.     |
 | `)`    | End a macro definition.                                                  |
 | `!`    | Apply the macro where the name is the current cell's value.              |
+| `#`    | Display debug info (to stderr).                                          |
 
 * Brainrot's cells are all exactly one octet, i.e., an eight-bit unsigned
   integer. For this reason, addition and subtraction are both defined modulo
@@ -29,6 +30,7 @@ skimmed the Wikipedia article).
   `]`, `(`, `)`.
 * The file extension on Brainrot source code is typically '.br'. A '.bf'
   extension implies the code is compatible with Brainrot's parent language.
+* All non-symbol input characters are ignored.
 
 # Usage
 
