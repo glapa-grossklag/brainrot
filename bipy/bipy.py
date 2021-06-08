@@ -58,12 +58,13 @@ def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.s
                         else:
                             skip -= 1
                 else:
-                    raise SyntaxError("missing closing bracket")
+                    raise SyntaxError("missing ']'")
 
         elif c == ']':
             # If the byte at the data pointer is non-zero, then jump the
             # instruction pointer back to the command after the matching '['.
             if tape.value != 0:
+
                 skip = 0  # The number of nested loops to skip over.
 
                 # Find matching '['.
@@ -77,7 +78,7 @@ def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.s
                         else:
                             skip -= 1
                 else:
-                    raise SyntaxError("missing open bracket")
+                    raise SyntaxError("missing '['")
 
         elif c == '(':
             name = tape.value
@@ -86,7 +87,7 @@ def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.s
             # Find matching ')'.
             for j in range(i + 1, len(code)):
                 if code[j] == '(':
-                    raise SyntaxError("illegal nested function definition")
+                    raise SyntaxError("illegal nested macro definition")
 
                 elif code[j] == ')':
                     namespace[name] = definition
@@ -96,15 +97,15 @@ def evaluate(code: str, tape: Tape, namespace: NameSpace, input_file: IO = sys.s
                 else:
                     definition += code[j]
             else:
-                raise SyntaxError("missing closing parenthesis")
+                raise SyntaxError("missing ')'")
 
         elif c == ')':
             # The `c == '('` case will handle any closing parenthesis, so this
             # shouldn't ever be seen.
-            raise SyntaxError("missing opening parenthesis")
+            raise SyntaxError("missing '('")
 
         elif c == '!':
-            # Adjust `code` to contain the definition.
+            # Adjust code to contain the definition.
             if tape.value in namespace:
                 code = code[:i + 1] + namespace[tape.value] + code[i + 1:]
 
